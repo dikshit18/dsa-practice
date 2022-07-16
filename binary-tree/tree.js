@@ -182,6 +182,40 @@ function topView(root) {
   });
   return res;
 }
+function findIndexToBuildTree(inorder, element, n) {
+  for (let i = 0; i < n; i++) {
+    if (inorder[i] === element) return i;
+    return -1;
+  }
+}
+function solveFromOrder(inorder, preorder, index, inOrderStart, inOrderEnd, n) {
+  if (index >= n || inOrderStart > inOrderEnd) return null;
+  let element = preorder[index++];
+  let root = new Node(element);
+  const position = findIndexToBuildTree(inorder, element, n);
+
+  root.left = solveFromOrder(
+    inorder,
+    preorder,
+    index,
+    inOrderStart,
+    position - 1,
+    n
+  );
+  root.right = solveFromOrder(
+    inorder,
+    preorder,
+    index,
+    position + 1,
+    inOrderEnd,
+    n
+  );
+  return root;
+}
+function treeFromInAndPostOrder(inorder, preorder, n) {
+  const preOrderIndex = 0;
+  solveFromOrder(inorder, preorder, preOrderIndex, 0, n - 1, n);
+}
 function main() {
   const tree = BuildTree(null);
   console.log(tree);

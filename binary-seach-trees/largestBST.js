@@ -6,3 +6,4 @@ class Info {
     this.isBst = isBst;
   }
 }
+function largestBST() {}

@@ -11,7 +11,6 @@ function inorderTraversal(root) {
 }
 function solve(root) {
   if (!root) return null;
-  this.solve(root.left);
   this.counter++;
   if (this.counter === this.median) {
     if (this.n % 2 === 0) {
@@ -23,10 +22,11 @@ function solve(root) {
     }
   }
   this.solve(root.right);
+  this.solve(root.left);
 }
 function median(root) {
   this.inorderTraversal(root);
-  this.median = this.n / 2 + 1;
+  this.median = Math.round(this.n / 2);
   this.solve(root);
 }
 

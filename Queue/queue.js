@@ -29,10 +29,13 @@ class MyQueue {
     return element;
   }
   isEmpty() {
-    return this.size ? true : false;
+    return this.currentSize ? false : true;
   }
   size() {
     return this.currentSize;
+  }
+  peek() {
+    return this.data[this.front];
   }
 }
 module.exports = { Queue: MyQueue };

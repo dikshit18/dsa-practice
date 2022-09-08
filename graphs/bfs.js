@@ -1,35 +1,45 @@
 class Solution {
-  // Function to return Breadth First Traversal of given graph.
   constructor() {
-    this.answer = [];
+    this.adjList = {};
+    this.answer;
     this.visited = new Map();
   }
-
-  bfs(node, adj) {
-    const queue = [node];
-    let queue_count = 0;
-    this.visited.set(node, 1);
-    while (queue_count < queue.length) {
-      const front = queue[queue_count];
-      this.answer.push(front);
-      //traverse all neighbours now
-      for (const item of adj.get(front)) {
-        if (!this.visited.has(item)) {
-          queue.push(item);
-          this.visited.set(item, 1);
-        }
+  prepareAdjList(edges) {
+    for (let i = 0; i < edges.length; i++) {
+      const u = edges[i];
+      const { first, second } = u;
+      if (this.adjList[first]) this.adjList[first].push();
+      else {
+        this.adjList[first] = [second];
       }
-      queue_front++;
+      if (this.adjList[second]) this.adjList[second].push();
+      else {
+        this.adjList[second] = [first];
+      }
     }
   }
-  bfsOfGraph(V, adj) {
-    // code here
-    for (let i = 0; i < V; i++) {
-      if (this.visited.has(i)) {
-        this.bfs(i, adj);
+  bfs(node) {
+    const queue = [node];
+    this.visited.set(node, true);
+    while (queue.length) {
+      const frontNode = queue.shift();
+      this.answer.push(frontNode);
+
+      for (const i of this.adjList[frontNode]) {
+        if (!this.visited.get(i)) {
+          queue.push(i);
+          this.visited.set(i, true);
+        }
       }
     }
-    console.log(this.answer);
+  }
+
+  calculateBfs(vertex) {
+    for (let i = 0; i < vertex.length; i++) {
+      if (!visted[i]) {
+        this.bfs(i);
+      }
+    }
     return this.answer;
   }
 }

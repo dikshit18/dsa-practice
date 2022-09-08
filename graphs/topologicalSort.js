@@ -28,4 +28,4 @@ class gfg {
     return returnStack;
   }
 }
-Number.MIN_SAFE_INTEGER;
+function main(V, edges) {}
